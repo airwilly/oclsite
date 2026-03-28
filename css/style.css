@@ -272,8 +272,10 @@ main {
   background-color: #dde8e0;
 }
 
-/* Points columns — centered because they're numeric */
-.data-table td.points {
+/* Points columns — centered because they're numeric.
+   Applies to both <td> (data rows) and <th> (header row). */
+.data-table td.points,
+.data-table th.points {
   text-align: center;
 }
 
@@ -356,6 +358,13 @@ main {
   margin-bottom: 0;
   font-style: italic;
   color: var(--color-text);
+}
+
+/* Standings table — fewer and shorter columns than the schedule table,
+   so it doesn't need the 560px floor. Overriding min-width prevents an
+   unnecessary horizontal scroll on phones. */
+.standings-table {
+  min-width: 340px;
 }
 
 /* Tables inside rules content.

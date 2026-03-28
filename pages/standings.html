@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Standings — Old Colony Four Ball League</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <!-- =====================
+       Site Header
+       ===================== -->
+  <header class="site-header">
+    <a href="../index.html" class="logo-link">
+      <img
+        src="../assets/images/OCL Logo 1.jpg"
+        alt="Old Colony Four Ball League crest — return to home"
+        class="site-logo"
+      >
+    </a>
+    <h1 class="site-title">Old Colony Four Ball League</h1>
+  </header>
+
+  <!-- =====================
+       Primary Navigation
+       "Standings" is the active page.
+       ===================== -->
+  <nav class="site-nav" aria-label="Primary navigation">
+    <ul>
+      <li><a href="schedule.html">Schedule &amp; Results</a></li>
+      <li><a href="standings.html" class="active">Standings</a></li>
+      <li><a href="rules.html">Rules</a></li>
+      <li><a href="games.html">Games</a></li>
+    </ul>
+  </nav>
+
+  <!-- =====================
+       Main Content
+       js/standings.js reads Sched26.csv, calculates standings
+       from completed matches, and fills the tbody.
+       ===================== -->
+  <main>
+    <section>
+      <h2 class="page-heading">2026 Standings</h2>
+
+      <div id="standings-container" class="table-wrapper">
+        <table class="data-table standings-table" id="standings-table">
+          <thead>
+            <tr>
+              <!--
+                Single-letter abbreviations save space and match the
+                common sports-standings convention. The title attribute
+                provides the full name as a tooltip on hover.
+              -->
+              <th>Team</th>
+              <th class="points" title="Wins">W</th>
+              <th class="points" title="Ties">T</th>
+              <th class="points" title="Losses">L</th>
+              <th class="points" title="Points: (Wins × 2) + (Ties × 1)">Pts</th>
+              <th class="points" title="Total Match Points earned across all matches">Match Pts</th>
+            </tr>
+          </thead>
+          <tbody id="standings-body">
+            <!-- Rows are inserted here by js/standings.js -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- =====================
+       Site Footer
+       ===================== -->
+  <footer class="site-footer">
+    <p>&copy; 2026 Old Colony Four Ball League</p>
+  </footer>
+
+  <script src="../js/standings.js"></script>
+
+</body>
+</html>
