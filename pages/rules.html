@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rules — Old Colony Four Ball League</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <!-- =====================
+       Site Header
+       ===================== -->
+  <header class="site-header">
+    <a href="../index.html" class="logo-link">
+      <img
+        src="../assets/images/OCL Logo 1.jpg"
+        alt="Old Colony Four Ball League crest — return to home"
+        class="site-logo"
+      >
+    </a>
+    <h1 class="site-title">Old Colony Four Ball League</h1>
+  </header>
+
+  <!-- =====================
+       Primary Navigation
+       "Rules" is the active page.
+       ===================== -->
+  <nav class="site-nav" aria-label="Primary navigation">
+    <ul>
+      <li><a href="schedule.html">Schedule &amp; Results</a></li>
+      <li><a href="standings.html">Standings</a></li>
+      <li><a href="rules.html" class="active">Rules</a></li>
+      <li><a href="games.html">Games</a></li>
+    </ul>
+  </nav>
+
+  <!-- =====================
+       Main Content
+       js/rules.js fetches Rules.MD and injects the parsed
+       content into #rules-content.
+       ===================== -->
+  <main>
+    <section>
+      <h2 class="page-heading">League Rules</h2>
+      <div id="rules-content" class="rules-content">
+        <!-- Populated by js/rules.js -->
+      </div>
+    </section>
+  </main>
+
+  <!-- =====================
+       Site Footer
+       ===================== -->
+  <footer class="site-footer">
+    <p>&copy; 2026 Old Colony Four Ball League</p>
+  </footer>
+
+  <script src="../js/rules.js"></script>
+
+</body>
+</html>
