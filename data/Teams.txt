@@ -1,0 +1,10 @@
+Code,Team
+BR, Blackrock CC
+GC, Cohasset GC
+DYC, Duxbury YC
+HCC, Hatherly CC
+MCC, Marshfield CC
+PCC, Plymouth CC
+SCC, Scituate CC
+TL, Thorny Lea CC
+WGC, Wollaston GC
