@@ -1,0 +1,201 @@
+/* ============================================================
+   OCL Golf League — style.css
+   Shared styles used across all pages.
+   ============================================================ */
+
+
+/* ------------------------------------------------------------
+   CSS Custom Properties (variables)
+   Define colors and sizes in one place so they're easy to change.
+   ------------------------------------------------------------ */
+:root {
+  --color-green-dark:  #1b3d28;   /* header, footer background */
+  --color-green-mid:   #2e6644;   /* nav bar background */
+  --color-gold:        #b8963e;   /* accent, hover highlight */
+  --color-bg:          #f5f3ee;   /* page background (warm off-white) */
+  --color-text:        #1a1a1a;   /* primary body text */
+  --color-text-muted:  #555555;   /* secondary / paragraph text */
+  --color-white:       #ffffff;
+
+  --max-width: 960px;             /* caps content width on wide screens */
+
+  /* Georgia gives a classic, club-house feel for body text.
+     Segoe UI / Arial is used for UI elements like nav and headings. */
+  --font-body: Georgia, 'Times New Roman', serif;
+  --font-ui:   'Segoe UI', Arial, sans-serif;
+}
+
+
+/* ------------------------------------------------------------
+   Box-sizing Reset
+   Makes width/padding math predictable across all elements.
+   ------------------------------------------------------------ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* ------------------------------------------------------------
+   Body
+   flex column so the footer stays at the bottom of short pages.
+   ------------------------------------------------------------ */
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* ------------------------------------------------------------
+   Site Header
+   Dark green banner with centered logo and league name.
+   ------------------------------------------------------------ */
+.site-header {
+  background-color: var(--color-green-dark);
+  color: var(--color-white);
+  text-align: center;
+  padding: 2rem 1rem 1.5rem;
+}
+
+/* The logo is a circular badge (black on white JPG).
+   A subtle shadow helps it lift off the dark background. */
+.site-logo {
+  width: 130px;
+  height: auto;
+  margin-bottom: 1rem;
+  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.45);
+  border-radius: 50%; /* clips the white corners of the JPG into a circle */
+}
+
+.site-title {
+  font-family: var(--font-ui);
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--color-white);
+}
+
+
+/* ------------------------------------------------------------
+   Site Navigation
+   Horizontal bar below the header. Items wrap on small screens.
+   ------------------------------------------------------------ */
+.site-nav {
+  background-color: var(--color-green-mid);
+}
+
+/* ul holds the nav links in a centered row */
+.site-nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; /* allows items to stack on narrow screens */
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.site-nav a {
+  display: block;
+  padding: 0.85rem 1.5rem;
+  color: var(--color-white);
+  text-decoration: none;
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  transition: background-color 0.15s ease;
+}
+
+/* Gold highlight on hover/focus for clear feedback */
+.site-nav a:hover,
+.site-nav a:focus {
+  background-color: var(--color-gold);
+  outline: none;
+}
+
+/* Mark the current page's link so the user knows where they are.
+   Add class="active" to the matching <a> on each page. */
+.site-nav a.active {
+  background-color: var(--color-gold);
+}
+
+
+/* ------------------------------------------------------------
+   Main Content Area
+   flex: 1 makes it grow to fill space above the footer.
+   ------------------------------------------------------------ */
+main {
+  flex: 1;
+  max-width: var(--max-width);
+  width: 100%;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem;
+}
+
+
+/* ------------------------------------------------------------
+   Welcome Section (index.html)
+   Centered text block with a decorative heading underline.
+   ------------------------------------------------------------ */
+.welcome {
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.welcome h2 {
+  font-family: var(--font-ui);
+  font-size: 1.5rem;
+  color: var(--color-green-dark);
+  margin-bottom: 1.25rem;
+
+  /* Gold underline accent — inline-block is needed for it to size to the text */
+  display: inline-block;
+  border-bottom: 3px solid var(--color-gold);
+  padding-bottom: 0.4rem;
+}
+
+.welcome p {
+  color: var(--color-text-muted);
+  font-size: 1.05rem;
+  margin-bottom: 0.9rem;
+}
+
+
+/* ------------------------------------------------------------
+   Site Footer
+   Dark green strip pinned to the bottom.
+   ------------------------------------------------------------ */
+.site-footer {
+  background-color: var(--color-green-dark);
+  color: rgba(255, 255, 255, 0.55);
+  text-align: center;
+  padding: 1rem;
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+}
+
+
+/* ------------------------------------------------------------
+   Responsive — small screens (phones, ≤ 480px)
+   ------------------------------------------------------------ */
+@media (max-width: 480px) {
+  .site-title {
+    font-size: 1.2rem;
+  }
+
+  .site-logo {
+    width: 100px;
+  }
+
+  .site-nav a {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+  }
+}
