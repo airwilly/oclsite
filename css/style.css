@@ -183,6 +183,116 @@ main {
 
 
 /* ------------------------------------------------------------
+   Logo Link (header)
+   The logo on inner pages wraps in an <a> back to the home page.
+   Remove the default link underline and keep the image inline.
+   ------------------------------------------------------------ */
+.logo-link {
+  display: inline-block;
+  text-decoration: none;
+}
+
+
+/* ------------------------------------------------------------
+   Page Heading
+   Gold-underlined section heading shared by inner pages.
+   ------------------------------------------------------------ */
+.page-heading {
+  font-family: var(--font-ui);
+  font-size: 1.4rem;
+  color: var(--color-green-dark);
+  margin-bottom: 1.5rem;
+
+  /* inline-block so the border-bottom only spans the text width */
+  display: inline-block;
+  border-bottom: 3px solid var(--color-gold);
+  padding-bottom: 0.4rem;
+}
+
+
+/* ------------------------------------------------------------
+   Table Wrapper
+   Enables horizontal scrolling on narrow screens so the table
+   never gets squished below its natural min-width.
+   ------------------------------------------------------------ */
+.table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* smooth momentum scroll on iOS */
+}
+
+
+/* ------------------------------------------------------------
+   Data Table
+   Used for the schedule, standings, and any other tabular data.
+   ------------------------------------------------------------ */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;   /* removes gaps between cell borders */
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+
+  /* Sets a floor width so columns aren't squeezed tiny on phones.
+     The .table-wrapper scroll kicks in below this width. */
+  min-width: 560px;
+}
+
+/* Header row — dark green band */
+.data-table thead th {
+  background-color: var(--color-green-dark);
+  color: var(--color-white);
+  text-align: left;
+  padding: 0.65rem 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+/* Data cells */
+.data-table tbody td {
+  padding: 0.6rem 0.9rem;
+  border-bottom: 1px solid #ddd;
+  color: var(--color-text);
+}
+
+/* Zebra striping — alternating row tint aids readability in long tables */
+.data-table tbody tr:nth-child(even) {
+  background-color: #eef0ec;
+}
+
+/* Hover highlight so your eye can follow a row across wide tables */
+.data-table tbody tr:hover {
+  background-color: #dde8e0;
+}
+
+/* Points columns — centered because they're numeric */
+.data-table td.points {
+  text-align: center;
+}
+
+/* Winner styling — applied to the winning team's points cell.
+   Bold weight + dark green color make it stand out without being loud. */
+.data-table td.winner {
+  font-weight: 700;
+  color: var(--color-green-dark);
+}
+
+
+/* ------------------------------------------------------------
+   Error Message
+   Shown in place of a table when data fails to load.
+   ------------------------------------------------------------ */
+.error-message {
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  color: #8b1a1a;
+  background-color: #fdf0ef;
+  border-left: 4px solid #c0392b;
+  padding: 0.9rem 1.1rem;
+  border-radius: 2px;
+  line-height: 1.5;
+}
+
+
+/* ------------------------------------------------------------
    Responsive — small screens (phones, ≤ 480px)
    ------------------------------------------------------------ */
 @media (max-width: 480px) {
@@ -197,5 +307,13 @@ main {
   .site-nav a {
     padding: 0.75rem 1rem;
     font-size: 0.9rem;
+  }
+
+  .page-heading {
+    font-size: 1.2rem;
+  }
+
+  .data-table {
+    font-size: 0.875rem;
   }
 }

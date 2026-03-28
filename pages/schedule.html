@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Schedule &amp; Results — Old Colony Four Ball League</title>
+  <!-- One level up because this page lives in /pages/ -->
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <!-- =====================
+       Site Header
+       Logo links back to the home page.
+       ===================== -->
+  <header class="site-header">
+    <a href="../index.html" class="logo-link">
+      <img
+        src="../assets/images/OCL Logo 1.jpg"
+        alt="Old Colony Four Ball League crest — return to home"
+        class="site-logo"
+      >
+    </a>
+    <h1 class="site-title">Old Colony Four Ball League</h1>
+  </header>
+
+  <!-- =====================
+       Primary Navigation
+       "Schedule & Results" is the active page.
+       All other pages are siblings in /pages/ so no path prefix needed.
+       ===================== -->
+  <nav class="site-nav" aria-label="Primary navigation">
+    <ul>
+      <li><a href="schedule.html" class="active">Schedule &amp; Results</a></li>
+      <li><a href="standings.html">Standings</a></li>
+      <li><a href="rules.html">Rules</a></li>
+      <li><a href="games.html">Games</a></li>
+    </ul>
+  </nav>
+
+  <!-- =====================
+       Main Content
+       The table body is empty — js/schedule.js fills it in.
+       ===================== -->
+  <main>
+    <section>
+      <h2 class="page-heading">2026 Schedule &amp; Results</h2>
+
+      <!--
+        .table-wrapper enables horizontal scroll on narrow screens
+        so the table never gets squished below its min-width.
+      -->
+      <div id="schedule-container" class="table-wrapper">
+        <table class="data-table" id="schedule-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Home Team</th>
+              <th>Away Team</th>
+              <th>Home Pts</th>
+              <th>Away Pts</th>
+            </tr>
+          </thead>
+          <tbody id="schedule-body">
+            <!-- Rows are inserted here by js/schedule.js -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- =====================
+       Site Footer
+       ===================== -->
+  <footer class="site-footer">
+    <p>&copy; 2026 Old Colony Four Ball League</p>
+  </footer>
+
+  <!-- Script at end of body so the DOM is ready when it runs.
+       Path is one level up because this page lives in /pages/. -->
+  <script src="../js/schedule.js"></script>
+
+</body>
+</html>
