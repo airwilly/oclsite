@@ -84,18 +84,21 @@ body {
 
 /* ------------------------------------------------------------
    Site Navigation
-   Horizontal bar below the header. Items wrap on small screens.
+   Horizontal bar below the header. Always a single row.
    ------------------------------------------------------------ */
 .site-nav {
   background-color: var(--color-green-mid);
 }
 
-/* ul holds the nav links in a centered row */
+/* ul holds the nav links in a single centered row.
+   flex-wrap: nowrap prevents items from ever dropping to a
+   second row — we instead reduce font/padding at narrow widths
+   so all four items fit on one line down to 375px. */
 .site-nav ul {
   list-style: none;
   display: flex;
   justify-content: center;
-  flex-wrap: wrap; /* allows items to stack on narrow screens */
+  flex-wrap: nowrap;
   max-width: var(--max-width);
   margin: 0 auto;
 }
@@ -214,8 +217,14 @@ main {
    Table Wrapper
    Enables horizontal scrolling on narrow screens so the table
    never gets squished below its natural min-width.
+
+   width: 100% is explicit here (not just default auto) so the
+   browser can't miscalculate its size. Without a definite width,
+   some browsers won't trigger overflow-x: auto correctly, causing
+   the page itself to scroll instead of just this container.
    ------------------------------------------------------------ */
 .table-wrapper {
+  width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch; /* smooth momentum scroll on iOS */
 }
@@ -293,27 +302,70 @@ main {
 
 
 /* ------------------------------------------------------------
-   Responsive — small screens (phones, ≤ 480px)
+   Responsive — small screens
+   Minimum target: 375px (iPhone SE)
+
+   Nav sizing rationale at 375px:
+     font-size: 0.75rem (12px), padding: 0 0.5rem (8px per side)
+     "Schedule & Results" ≈ 128px, others ≈ 47–72px → total ~294px
+     fits within 375px with ~80px to spare, stays one row.
    ------------------------------------------------------------ */
-@media (max-width: 480px) {
-  .site-title {
-    font-size: 1.2rem;
+@media (max-width: 600px) {
+  /* --- Header: tighter padding, smaller logo and title --- */
+  .site-header {
+    padding: 1.25rem 1rem 1rem;
   }
 
   .site-logo {
-    width: 100px;
+    width: 90px;
+    margin-bottom: 0.6rem;
   }
 
+  .site-title {
+    font-size: 1.1rem;
+    letter-spacing: 0.02em;
+  }
+
+  /* --- Nav: one row, smaller text and padding ---
+     white-space: nowrap stops "Schedule & Results" from
+     line-breaking inside its own link item. */
   .site-nav a {
-    padding: 0.75rem 1rem;
-    font-size: 0.9rem;
+    padding: 0.7rem 0.5rem;
+    font-size: 0.75rem;
+    letter-spacing: 0;
+    white-space: nowrap;
   }
 
+  /* --- Main content: less breathing room needed on phones --- */
+  main {
+    padding: 1.5rem 0.75rem;
+  }
+
+  /* --- Page heading --- */
   .page-heading {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
   }
 
+  /* --- Data table: smaller text and tighter cells.
+     min-width reduced to 460px (from 560px) — still triggers
+     the .table-wrapper scroll, but with less distance to scroll. --- */
   .data-table {
-    font-size: 0.875rem;
+    font-size: 0.8rem;
+    min-width: 460px;
+  }
+
+  .data-table thead th {
+    padding: 0.5rem 0.55rem;
+    font-size: 0.75rem;
+    letter-spacing: 0;
+  }
+
+  .data-table tbody td {
+    padding: 0.45rem 0.55rem;
+  }
+
+  /* --- Welcome text --- */
+  .welcome p {
+    font-size: 0.95rem;
   }
 }
