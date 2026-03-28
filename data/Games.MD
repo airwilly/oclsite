@@ -1,42 +1,90 @@
-##Favorite Games at OCL Clubs
+# Favorite Games at OCL Clubs
 
-The Coho Standard Nassua
-2 man teams, played at 90% net off the low man unless close enough caps to play straight up
+---
 
-Breakfast balls off first tee (if you choose to hit one you play it)
+## The Coho Standard Nassau
 
-Automatic 2-down presses
+A 2-man team nassau played at **90% net off the low man** (or straight up if handicaps are close enough).
 
-Sides are worth $10, but this can be adjusted on first tee to whatever suits the group
+**Format basics:**
+- Breakfast balls off the first tee — if you choose to hit one, you must play it
+- Automatic **2-down presses**
+- Sides are worth **$10** — adjustable on the first tee to suit the group
 
-Dots are pooled to form sides, as follows:
+---
 
-First team that gets 5 dots wins a side, and a fresh dot pool starts
+**Dot System:**
 
-Whoever has the most dots in the last dot pool at the close of #18 wins the final pool
+Dots are pooled to form sides:
+- The first team to reach **5 dots** wins that side — a fresh pool immediately starts
+- Whoever has the **most dots in the final pool** at the close of #18 wins it
+- Dots are recorded as soon as a shot is holed or conceded — this matters in a race to 5
 
-Dots are recorded as soon as shot is holed or given (this is important in a race to 5)
+**Standard Dots:**
 
-Standard dots are as follows, but others can be added (be creative):
+| Dot | Description | Value |
+|-----|-------------|-------|
+| Birdie | — | 1 dot |
+| Eagle | — | 2 dots |
+| Greenie | Closest to pin on a par 3 — must 2-putt to collect | 1 dot |
+| Whippin | Hole out for par or better from off the green | 1 dot |
+| Sandy | Up and down from sand for par or better — the shot immediately after the bunker shot must be holed. Can be doubled if it takes two bunker shots before holing out | 1 dot |
+| Snake | See below | varies |
 
-Birdies / Eagles (worth 2)
+> You can earn multiple dots on one hole. Example: a bunker shot holed for birdie earns birdie + whippin + sandy = **3 dots**.
 
-Greenies (closest to the pin on par 3s, but have to 2 putt),
+> Be creative — additional dot types can be agreed upon before the round.
 
-Whippins (a hole out for par or better from off the green)
+**Snakes:**
+The opposing team may call a snake to wager that a player will 3-putt:
 
-Sandies (up and down from the sand for par or better, but note: has to be an up and down or hole out, i.e. the next shot after the bunker shot has to be holed; you can double these up if two shots out of bunker then holing for par)
+| Outcome | Result |
+|---------|--------|
+| Player 2-putts | Calling team loses 1 dot |
+| Player 1-putts | Calling team loses 3 dots |
+| Player 3-putts | Calling team wins 1 dot |
+| Player 4-putts | Calling team wins 3 dots |
 
-You can get multiple dots on one hole, e.g. a bunket shot holed for birdie is a birdie, whippin, sandy for 3 dots
+---
 
-Snakes - Opposing team can call a snake if they want to wager a player on the other team will 3 putt.  If the player 3 putts the opposing team gets a dot, if they 4 putt the opposing team gets 3 dots.  If they 2 putt they get the dot, and if they 1 putt they get 3 dots.
+## Coho Vegas
 
-Coho Vegas
-An optional, higher stakes game best played with equally matched teams so handicaps do not have to be used.  Another 4-ball match where the two scores from each team are combined to form a 2-digit number.  For example, if team A makes a 4 and 5 on hole 1 (a par 4) and team B makes a 5 and 6, the score is 45 to 56 so +11 for team A; note the low score is used as the first digit. If a player makes a birdie or better, this flips the other team's digits so the higher number goes first.  So for the example above if one player on team A made a 3, the score would be 35 to 65 for +30.  If both players on the same team make birdie or better the bet for that hole is doubled.  For example, team A makes two 3s and team B makes a 4 and a 5.  That is 33-54 and bet is doubled so result is +42.
+An optional higher-stakes game, best played with evenly matched teams (handicaps typically not needed).
 
-Standard game at Cohasset is $1 a point with a max loss of $100 per player, but points and maxes can be negotiated on first tee.
+**How it works:**
+Each team's two scores on a hole are combined into a 2-digit number, with the **low score as the first digit**.
 
-The Coho Bellagio Add-on
-Can be decided on first tee as an available option and works as follows:
+| Team A | Team B | Score | Result |
+|--------|--------|-------|--------|
+| 4, 5 | 5, 6 | 45 vs 56 | +11 Team A |
 
-After the completion of the 17th hole, the losing team can put it all on the line and go double or nothing on the final hole.  For example, team A is down $50 dollars through 17 and 1 down in a final match (assume $10 Nassau).  Team A can go “Bellagio” and play the 18th hole for $60 dollars (they are forfeiting the final open match they are down to execute the option).  If they win the hole, they break even.  If the tie, they lose the $60 and if they lose the hole they lose $120.
+**Birdie flip:** If one player on a team makes birdie or better, the **opposing team's digits are flipped** (higher number goes first):
+
+| Team A | Team B | Score | Result |
+|--------|--------|-------|--------|
+| 3, 5 | 5, 6 | 35 vs 65 | +30 Team A |
+
+**Double birdie:** If both players on the same team make birdie or better, the **hole bet is doubled**:
+
+| Team A | Team B | Score | Result |
+|--------|--------|-------|--------|
+| 3, 3 | 4, 5 | 33 vs 54 | +42 Team A (doubled) |
+
+> Standard rate is **$1 per point** with a **$100 max loss per player** — negotiable on the first tee.
+
+---
+
+## The Coho Bellagio
+
+An add-on option that must be declared available on the first tee. After completing the **17th hole**, the losing team may invoke the Bellagio — going **double or nothing on #18**.
+
+**Example:**
+- Team A is down $50 through 17 holes
+- Team A is 1-down in a $10 Nassau final match
+- Team A calls Bellagio — they **forfeit the open final match** and play #18 for $60
+
+| #18 Result | Outcome |
+|------------|---------|
+| Team A wins | Break even |
+| Tie | Team A loses $60 |
+| Team A loses | Team A loses $120 |
