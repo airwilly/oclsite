@@ -6,18 +6,28 @@
 
 /* ------------------------------------------------------------
    CSS Custom Properties (variables)
-   Define colors and sizes in one place so they're easy to change.
+   Define colors, sizes, and effects in one place.
    ------------------------------------------------------------ */
 :root {
   --color-green-dark:  #1b3d28;   /* header, footer background */
   --color-green-mid:   #2e6644;   /* nav bar background */
-  --color-gold:        #b8963e;   /* accent, hover highlight */
+  --color-green-light: #e8f2ec;   /* even-row stripe (lighter, greener) */
+  --color-gold:        #b8963e;   /* accent, active nav, heading underline */
+  --color-gold-light:  #d4b062;   /* lighter gold for hover accents */
   --color-bg:          #f5f3ee;   /* page background (warm off-white) */
   --color-text:        #1a1a1a;   /* primary body text */
-  --color-text-muted:  #555555;   /* secondary / paragraph text */
+  --color-text-muted:  #5a5a5a;   /* secondary / paragraph text */
   --color-white:       #ffffff;
+  --color-border:      #cfd5cb;   /* table and HR borders */
 
   --max-width: 960px;             /* caps content width on wide screens */
+
+  --radius-sm: 4px;               /* small rounding (badges, alerts) */
+  --radius-md: 8px;               /* card / table rounding */
+
+  /* Elevation shadows */
+  --shadow-card: 0 2px 16px rgba(0, 0, 0, 0.09);
+  --shadow-logo: 0 4px 20px rgba(0, 0, 0, 0.50);
 
   /* Georgia gives a classic, club-house feel for body text.
      Segoe UI / Arial is used for UI elements like nav and headings. */
@@ -45,7 +55,7 @@ body {
   font-family: var(--font-body);
   background-color: var(--color-bg);
   color: var(--color-text);
-  line-height: 1.6;
+  line-height: 1.65;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -54,46 +64,73 @@ body {
 
 /* ------------------------------------------------------------
    Site Header
-   Dark green banner with centered logo and league name.
+   Dark green banner with subtle gradient and gold accent line.
    ------------------------------------------------------------ */
 .site-header {
-  background-color: var(--color-green-dark);
+  /* Slight directional gradient adds depth without being heavy */
+  background: linear-gradient(170deg, #213f2d 0%, var(--color-green-dark) 65%);
   color: var(--color-white);
   text-align: center;
-  padding: 2rem 1rem 1.5rem;
+  padding: 2.5rem 1rem 1.75rem;
+  /* Thin gold line separates header from nav */
+  border-bottom: 3px solid var(--color-gold);
 }
 
 /* The logo is a circular badge (black on white JPG).
-   A subtle shadow helps it lift off the dark background. */
+   Gold ring outline ties it to the site's accent color. */
 .site-logo {
   width: 130px;
   height: auto;
   margin-bottom: 1rem;
-  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.45);
-  border-radius: 50%; /* clips the white corners of the JPG into a circle */
+  box-shadow: var(--shadow-logo);
+  border-radius: 50%;
+  /* Subtle gold ring around the circular badge */
+  outline: 2px solid rgba(184, 150, 62, 0.5);
+  outline-offset: 4px;
+}
+
+/* Hero variant — larger logo used on the homepage only.
+   Add class="hero-logo" to the <img> on index.html. */
+.hero-logo {
+  width: 170px;
+  outline-offset: 5px;
 }
 
 .site-title {
   font-family: var(--font-ui);
-  font-size: 1.6rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
   color: var(--color-white);
+  /* Gentle shadow improves legibility on the gradient background */
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.30);
+}
+
+/* Tagline — appears beneath the title on the homepage.
+   Add <p class="site-tagline"> after <h1 class="site-title"> in index.html. */
+.site-tagline {
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.62);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-top: 0.55rem;
 }
 
 
 /* ------------------------------------------------------------
    Site Navigation
-   Horizontal bar below the header. Always a single row.
+   Horizontal bar below the header.
    ------------------------------------------------------------ */
 .site-nav {
   background-color: var(--color-green-mid);
+  /* Downward shadow separates nav from page content */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.20);
 }
 
 /* ul holds the nav links in a single centered row.
    flex-wrap: nowrap prevents items from ever dropping to a
-   second row — we instead reduce font/padding at narrow widths
-   so all four items fit on one line down to 375px. */
+   second row — we instead reduce font/padding at narrow widths. */
 .site-nav ul {
   list-style: none;
   display: flex;
@@ -105,27 +142,49 @@ body {
 
 .site-nav a {
   display: block;
-  padding: 0.85rem 1.5rem;
+  padding: 0.9rem 1.5rem;
   color: var(--color-white);
   text-decoration: none;
   font-family: var(--font-ui);
-  font-size: 0.95rem;
-  font-weight: 500;
-  letter-spacing: 0.03em;
-  transition: background-color 0.15s ease;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  /* position: relative needed for the ::after underline pseudo-element */
+  position: relative;
+  transition: color 0.15s ease, background-color 0.15s ease;
 }
 
-/* Gold highlight on hover/focus for clear feedback */
+/* Animated gold underline — grows from center on hover / active.
+   This is more refined than a full background-color fill. */
+.site-nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-gold);
+  transform: translateX(-50%);
+  transition: width 0.2s ease;
+}
+
+.site-nav a:hover::after,
+.site-nav a:focus::after,
+.site-nav a.active::after {
+  width: 75%;
+}
+
+/* Subtle tint on hover; focus removes default outline (we have the underline) */
 .site-nav a:hover,
 .site-nav a:focus {
-  background-color: var(--color-gold);
+  background-color: rgba(255, 255, 255, 0.10);
   outline: none;
 }
 
-/* Mark the current page's link so the user knows where they are.
-   Add class="active" to the matching <a> on each page. */
+/* Active page — gold text instead of full bg fill, pairs with underline */
 .site-nav a.active {
-  background-color: var(--color-gold);
+  color: var(--color-gold);
 }
 
 
@@ -138,13 +197,13 @@ main {
   max-width: var(--max-width);
   width: 100%;
   margin: 0 auto;
-  padding: 2.5rem 1.25rem;
+  padding: 3rem 1.5rem;
 }
 
 
 /* ------------------------------------------------------------
-   Welcome Section (index.html)
-   Centered text block with a decorative heading underline.
+   Welcome / Hero Section (index.html)
+   Centered text block with optional quick-link buttons below.
    ------------------------------------------------------------ */
 .welcome {
   max-width: 680px;
@@ -154,20 +213,56 @@ main {
 
 .welcome h2 {
   font-family: var(--font-ui);
-  font-size: 1.5rem;
+  font-size: 1.6rem;
+  font-weight: 700;
   color: var(--color-green-dark);
-  margin-bottom: 1.25rem;
-
-  /* Gold underline accent — inline-block is needed for it to size to the text */
+  margin-bottom: 1.5rem;
+  /* Gold underline accent — inline-block sizes the border to the text */
   display: inline-block;
   border-bottom: 3px solid var(--color-gold);
-  padding-bottom: 0.4rem;
+  padding-bottom: 0.45rem;
+  letter-spacing: 0.02em;
 }
 
 .welcome p {
   color: var(--color-text-muted);
-  font-size: 1.05rem;
-  margin-bottom: 0.9rem;
+  font-size: 1.08rem;
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+
+/* Quick-nav buttons inside the welcome section.
+   Wrap links in <div class="home-nav"> in index.html. */
+.home-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.home-nav a {
+  display: inline-block;
+  padding: 0.65rem 1.4rem;
+  background-color: var(--color-green-dark);
+  color: var(--color-white);
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  border: 2px solid transparent;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.home-nav a:hover,
+.home-nav a:focus {
+  background-color: var(--color-white);
+  color: var(--color-green-dark);
+  border-color: var(--color-green-dark);
+  outline: none;
 }
 
 
@@ -177,18 +272,20 @@ main {
    ------------------------------------------------------------ */
 .site-footer {
   background-color: var(--color-green-dark);
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(255, 255, 255, 0.50);
   text-align: center;
-  padding: 1rem;
+  padding: 1.25rem 1rem;
   font-family: var(--font-ui);
-  font-size: 0.85rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  /* Subtle gold line mirrors the header accent */
+  border-top: 2px solid rgba(184, 150, 62, 0.30);
 }
 
 
 /* ------------------------------------------------------------
    Logo Link (header)
    The logo on inner pages wraps in an <a> back to the home page.
-   Remove the default link underline and keep the image inline.
    ------------------------------------------------------------ */
 .logo-link {
   display: inline-block;
@@ -202,31 +299,33 @@ main {
    ------------------------------------------------------------ */
 .page-heading {
   font-family: var(--font-ui);
-  font-size: 1.4rem;
+  font-size: 1.5rem;
+  font-weight: 700;
   color: var(--color-green-dark);
-  margin-bottom: 1.5rem;
-
+  margin-bottom: 1.75rem;
   /* inline-block so the border-bottom only spans the text width */
   display: inline-block;
   border-bottom: 3px solid var(--color-gold);
-  padding-bottom: 0.4rem;
+  padding-bottom: 0.45rem;
+  letter-spacing: 0.02em;
 }
 
 
 /* ------------------------------------------------------------
    Table Wrapper
-   Enables horizontal scrolling on narrow screens so the table
-   never gets squished below its natural min-width.
+   Enables horizontal scrolling on narrow screens. Rounded corners
+   and a card shadow give tables a polished, lifted appearance.
 
-   width: 100% is explicit here (not just default auto) so the
-   browser can't miscalculate its size. Without a definite width,
-   some browsers won't trigger overflow-x: auto correctly, causing
-   the page itself to scroll instead of just this container.
+   overflow-x: auto clips the content to the border-radius shape
+   in all modern browsers, so the table header corners appear rounded
+   without any extra markup.
    ------------------------------------------------------------ */
 .table-wrapper {
   width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch; /* smooth momentum scroll on iOS */
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
 }
 
 
@@ -236,51 +335,62 @@ main {
    ------------------------------------------------------------ */
 .data-table {
   width: 100%;
-  border-collapse: collapse;   /* removes gaps between cell borders */
+  border-collapse: collapse;
   font-family: var(--font-ui);
   font-size: 0.95rem;
-
-  /* Sets a floor width so columns aren't squeezed tiny on phones.
+  /* Sets a floor so columns aren't squeezed tiny on phones.
      The .table-wrapper scroll kicks in below this width. */
   min-width: 560px;
 }
 
-/* Header row — dark green band */
+/* Header row — dark green band with uppercase labels */
 .data-table thead th {
   background-color: var(--color-green-dark);
   color: var(--color-white);
   text-align: left;
-  padding: 0.65rem 0.9rem;
+  padding: 0.8rem 1rem;
   font-weight: 600;
-  letter-spacing: 0.03em;
+  font-size: 0.8rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
 }
+
+/* The wrapper's border-radius clips the table visually, but we also
+   set border-radius on the first/last header cells so they look
+   correct in browsers that don't clip overflow-x containers. */
+.data-table thead th:first-child { border-top-left-radius:  var(--radius-md); }
+.data-table thead th:last-child  { border-top-right-radius: var(--radius-md); }
 
 /* Data cells */
 .data-table tbody td {
-  padding: 0.6rem 0.9rem;
-  border-bottom: 1px solid #ddd;
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid var(--color-border);
   color: var(--color-text);
+}
+
+/* Remove the border from the last row so it doesn't double up
+   with the wrapper's rounded bottom edge */
+.data-table tbody tr:last-child td {
+  border-bottom: none;
 }
 
 /* Zebra striping — alternating row tint aids readability in long tables */
 .data-table tbody tr:nth-child(even) {
-  background-color: #eef0ec;
+  background-color: var(--color-green-light);
 }
 
-/* Hover highlight so your eye can follow a row across wide tables */
+/* Hover highlight — slightly richer green so your eye tracks the row */
 .data-table tbody tr:hover {
-  background-color: #dde8e0;
+  background-color: #cce0d4;
 }
 
-/* Points columns — centered because they're numeric.
-   Applies to both <td> (data rows) and <th> (header row). */
+/* Points columns — centered because they're numeric */
 .data-table td.points,
 .data-table th.points {
   text-align: center;
 }
 
-/* Winner styling — applied to the winning team's points cell.
-   Bold weight + dark green color make it stand out without being loud. */
+/* Winner styling — bold weight + dark green make it stand out */
 .data-table td.winner {
   font-weight: 700;
   color: var(--color-green-dark);
@@ -289,69 +399,64 @@ main {
 
 /* ------------------------------------------------------------
    Rules Content
-   Styles for elements generated by js/rules.js when it parses
-   Rules.MD. All selectors are scoped to .rules-content so they
-   don't affect tables or lists anywhere else on the site.
+   Styles for elements generated by js/rules.js. All selectors
+   are scoped to .rules-content to avoid affecting other pages.
    ------------------------------------------------------------ */
 
 /* Container: comfortable reading width, generous line height */
 .rules-content {
   max-width: 740px;
-  line-height: 1.75;
+  line-height: 1.8;
 }
 
-/* Rule headings — ## in the MD becomes <h3> in the HTML.
-   A thin gold underline visually connects them to the site theme. */
+/* Rule headings — ## in the MD becomes <h3> in the HTML */
 .rules-content h3 {
   font-family: var(--font-ui);
   font-size: 1.05rem;
   font-weight: 700;
   color: var(--color-green-dark);
-  margin: 1.75rem 0 0.5rem;
-  padding-bottom: 0.25rem;
+  margin: 2rem 0 0.6rem;
+  padding-bottom: 0.3rem;
   border-bottom: 2px solid var(--color-gold);
 }
 
-/* Suppress the top margin on the very first rule heading so it
-   sits flush against the page-heading without a big gap. */
+/* No top gap on the very first heading */
 .rules-content h3:first-child {
   margin-top: 0;
 }
 
-/* Horizontal rules — used as dividers between sections in the MD.
-   Styled very lightly so they read as breathing space, not barriers. */
+/* Horizontal rules — gentle visual breathing space between sections */
 .rules-content hr {
   border: none;
-  border-top: 1px solid #d4d8d0;
-  margin: 1.5rem 0;
+  border-top: 1px solid var(--color-border);
+  margin: 1.75rem 0;
 }
 
 /* Paragraphs */
 .rules-content p {
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.9rem;
   color: var(--color-text);
 }
 
-/* Unordered and ordered lists */
+/* Lists */
 .rules-content ul,
 .rules-content ol {
-  margin: 0.4rem 0 0.9rem 1.5rem;
+  margin: 0.4rem 0 1rem 1.5rem;
   color: var(--color-text);
 }
 
 .rules-content li {
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.35rem;
 }
 
-/* Blockquote — used for important callout notes (e.g. weather rule).
-   Left border in mid-green + tinted background makes it stand out
-   without being alarming. */
+/* Blockquote — important callout notes.
+   Left green border + tinted background without being alarming. */
 .rules-content blockquote {
-  margin: 0.9rem 0;
-  padding: 0.7rem 1rem;
-  background-color: #ecf3ee;
+  margin: 1rem 0;
+  padding: 0.8rem 1.1rem;
+  background-color: #ebf3ee;
   border-left: 4px solid var(--color-green-mid);
-  border-radius: 0 3px 3px 0;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
 }
 
 .rules-content blockquote p {
@@ -360,16 +465,12 @@ main {
   color: var(--color-text);
 }
 
-/* Standings table — fewer and shorter columns than the schedule table,
-   so it doesn't need the 560px floor. Overriding min-width prevents an
-   unnecessary horizontal scroll on phones. */
+/* Standings table — fewer columns, smaller min-width floor */
 .standings-table {
   min-width: 340px;
 }
 
-/* Tables inside rules content.
-   Sized to their content (width: auto) rather than stretching
-   full-width like the schedule table. */
+/* Tables inside rules content — sized to content, not full-width */
 .rules-table {
   border-collapse: collapse;
   font-family: var(--font-ui);
@@ -382,19 +483,26 @@ main {
   background-color: var(--color-green-dark);
   color: var(--color-white);
   text-align: left;
-  padding: 0.5rem 0.9rem;
+  padding: 0.55rem 1rem;
   font-weight: 600;
   white-space: nowrap;
+  letter-spacing: 0.04em;
+  font-size: 0.8rem;
+  text-transform: uppercase;
 }
 
 .rules-table tbody td {
-  padding: 0.45rem 0.9rem;
-  border-bottom: 1px solid #ddd;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--color-border);
   color: var(--color-text);
 }
 
+.rules-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
 .rules-table tbody tr:nth-child(even) {
-  background-color: #eef0ec;
+  background-color: var(--color-green-light);
 }
 
 
@@ -409,24 +517,23 @@ main {
   background-color: #fdf0ef;
   border-left: 4px solid #c0392b;
   padding: 0.9rem 1.1rem;
-  border-radius: 2px;
+  border-radius: var(--radius-sm);
   line-height: 1.5;
 }
 
 
 /* ------------------------------------------------------------
-   Responsive — small screens
+   Responsive — small screens (≤ 600px)
    Minimum target: 375px (iPhone SE)
 
-   Nav sizing rationale at 375px:
-     font-size: 0.75rem (12px), padding: 0 0.5rem (8px per side)
-     "Schedule & Results" ≈ 128px, others ≈ 47–72px → total ~294px
-     fits within 375px with ~80px to spare, stays one row.
+   Nav sizing at 375px:
+     font-size: 0.73rem (~11.7px), padding: 1rem 0.6rem
+     tap target height: ~11.7 + 32 = ~44px (meets 44px minimum)
    ------------------------------------------------------------ */
 @media (max-width: 600px) {
-  /* --- Header: tighter padding, smaller logo and title --- */
+  /* --- Header: tighter padding --- */
   .site-header {
-    padding: 1.25rem 1rem 1rem;
+    padding: 1.5rem 1rem 1.25rem;
   }
 
   .site-logo {
@@ -434,51 +541,81 @@ main {
     margin-bottom: 0.6rem;
   }
 
-  .site-title {
-    font-size: 1.1rem;
-    letter-spacing: 0.02em;
+  /* Hero logo stays a bit bigger than the standard logo on mobile */
+  .hero-logo {
+    width: 115px;
+    outline-offset: 4px;
   }
 
-  /* --- Nav: one row, smaller text and padding ---
-     white-space: nowrap stops "Schedule & Results" from
-     line-breaking inside its own link item. */
+  .site-title {
+    font-size: 1.15rem;
+    letter-spacing: 0.025em;
+  }
+
+  .site-tagline {
+    font-size: 0.72rem;
+    letter-spacing: 0.07em;
+  }
+
+  /* --- Nav: padding gives a ~44px tap target height --- */
   .site-nav a {
-    padding: 0.7rem 0.5rem;
-    font-size: 0.75rem;
-    letter-spacing: 0;
+    padding: 1rem 0.6rem;
+    font-size: 0.73rem;
+    letter-spacing: 0.03em;
     white-space: nowrap;
   }
 
-  /* --- Main content: less breathing room needed on phones --- */
+  /* --- Main content --- */
   main {
-    padding: 1.5rem 0.75rem;
+    padding: 1.75rem 0.9rem;
   }
 
   /* --- Page heading --- */
   .page-heading {
-    font-size: 1.15rem;
+    font-size: 1.2rem;
+    margin-bottom: 1.25rem;
   }
 
-  /* --- Data table: smaller text and tighter cells.
-     min-width reduced to 460px (from 560px) — still triggers
-     the .table-wrapper scroll, but with less distance to scroll. --- */
+  /* --- Welcome --- */
+  .welcome h2 {
+    font-size: 1.3rem;
+  }
+
+  .welcome p {
+    font-size: 0.97rem;
+  }
+
+  /* --- Data table: smaller text and tighter cells --- */
   .data-table {
-    font-size: 0.8rem;
+    font-size: 0.82rem;
     min-width: 460px;
   }
 
   .data-table thead th {
-    padding: 0.5rem 0.55rem;
-    font-size: 0.75rem;
-    letter-spacing: 0;
+    padding: 0.65rem 0.65rem;
+    font-size: 0.72rem;
   }
 
   .data-table tbody td {
-    padding: 0.45rem 0.55rem;
+    padding: 0.55rem 0.65rem;
   }
 
-  /* --- Welcome text --- */
-  .welcome p {
-    font-size: 0.95rem;
+  /* --- Scroll hint: appears below the table to signal horizontal scroll.
+       The ::after pseudo-element is a block child of .table-wrapper,
+       placed after the table. Because the wrapper has no fixed height,
+       it expands to include this hint row and it is always visible. --- */
+  .table-wrapper::after {
+    content: '← swipe to scroll →';
+    display: block;
+    text-align: center;
+    font-size: 0.7rem;
+    font-family: var(--font-ui);
+    color: var(--color-text-muted);
+    font-style: italic;
+    padding: 0.4rem 0.5rem;
+    background-color: var(--color-bg);
+    /* Rounds the bottom of the hint to match the wrapper's radius */
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    border-top: 1px solid var(--color-border);
   }
 }
