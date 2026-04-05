@@ -507,6 +507,126 @@ main {
 
 
 /* ------------------------------------------------------------
+   Compact Page Header  (inner pages only — not index.html)
+   A single slim bar: OCL Logo 2 on the left, nav links on the right.
+   Replaces the stacked .site-header + .site-nav used on the homepage.
+   ------------------------------------------------------------ */
+.page-header {
+  background: linear-gradient(170deg, #213f2d 0%, var(--color-green-dark) 65%);
+  border-bottom: 3px solid var(--color-gold);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.55rem 1.5rem;
+  /* position: relative lets the mobile dropdown anchor to this bar */
+  position: relative;
+}
+
+/* Logo 2 is not assumed to be circular — no border-radius here */
+.compact-logo {
+  height: 46px;
+  width: auto;
+  display: block;
+}
+
+/* The <nav> inside .page-header holds both the link list and
+   the hamburger button as siblings */
+.page-header nav {
+  display: flex;
+  align-items: center;
+}
+
+/* Horizontal link list — visible on desktop, hidden on mobile */
+.nav-links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+.nav-links a {
+  display: block;
+  padding: 0.55rem 1rem;
+  color: var(--color-white);
+  text-decoration: none;
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  position: relative;
+  transition: color 0.15s ease;
+}
+
+/* Animated gold underline — same pattern as the homepage nav */
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px; /* sits on the header's gold border */
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-gold);
+  transform: translateX(-50%);
+  transition: width 0.2s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a:focus::after,
+.nav-links a.active::after {
+  width: 70%;
+}
+
+.nav-links a:hover,
+.nav-links a:focus {
+  color: var(--color-gold-light);
+  outline: none;
+}
+
+.nav-links a.active {
+  color: var(--color-gold);
+}
+
+
+/* ------------------------------------------------------------
+   Hamburger Toggle Button
+   Hidden on desktop. Shown on mobile to open/close the nav.
+   Three <span> elements animate into an × when open.
+   ------------------------------------------------------------ */
+.nav-toggle {
+  display: none; /* shown via the mobile media query below */
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  margin-left: 0.5rem;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background-color: var(--color-white);
+  border-radius: 2px;
+  transition: transform 0.22s ease, opacity 0.22s ease;
+}
+
+/* × animation when aria-expanded="true" */
+.nav-toggle[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.nav-toggle[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+.nav-toggle[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+
+/* ------------------------------------------------------------
    Error Message
    Shown in place of a table when data fails to load.
    ------------------------------------------------------------ */
@@ -617,5 +737,56 @@ main {
     /* Rounds the bottom of the hint to match the wrapper's radius */
     border-radius: 0 0 var(--radius-md) var(--radius-md);
     border-top: 1px solid var(--color-border);
+  }
+
+  /* --- Compact header on mobile ---
+     Tighten padding and reduce logo height. */
+  .page-header {
+    padding: 0.45rem 1rem;
+  }
+
+  .compact-logo {
+    height: 36px;
+  }
+
+  /* --- Show the hamburger button, hide the link list ---
+     The link list becomes a full-width dropdown anchored to
+     the bottom of .page-header via position: absolute. */
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav-links {
+    display: none; /* hidden until toggled open */
+    position: absolute;
+    top: 100%; /* flush below the compact header bar */
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    background-color: var(--color-green-mid);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+    z-index: 200; /* above page content */
+  }
+
+  /* nav.js adds this class to open the menu */
+  .nav-links.nav-open {
+    display: flex;
+  }
+
+  /* Full-width tappable rows in the dropdown */
+  .nav-links a {
+    padding: 1rem 1.5rem;
+    font-size: 0.88rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+  }
+
+  .nav-links li:last-child a {
+    border-bottom: none;
+  }
+
+  /* Underline animation doesn't apply in the stacked dropdown */
+  .nav-links a::after {
+    display: none;
   }
 }

@@ -10,33 +10,31 @@
 <body>
 
   <!-- =====================
-       Site Header
-       Logo links back to the home page.
+       Compact Page Header
+       Logo 2 left, nav right. Hamburger replaces links on mobile.
        ===================== -->
-  <header class="site-header">
+  <header class="page-header">
     <a href="../index.html" class="logo-link">
       <img
-        src="../assets/images/OCL Logo 1.jpg"
-        alt="Old Colony Four Ball League crest — return to home"
-        class="site-logo"
+        src="../assets/images/OCL Logo 2.jpg"
+        alt="Old Colony Four Ball League — return to home"
+        class="compact-logo"
       >
     </a>
-    <h1 class="site-title">Old Colony Four Ball League</h1>
+    <nav aria-label="Primary navigation">
+      <ul class="nav-links" id="nav-links">
+        <li><a href="schedule.html" class="active">Schedule &amp; Results</a></li>
+        <li><a href="standings.html">Standings</a></li>
+        <li><a href="rules.html">Rules</a></li>
+        <li><a href="games.html">Games</a></li>
+      </ul>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Open navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
   </header>
-
-  <!-- =====================
-       Primary Navigation
-       "Schedule & Results" is the active page.
-       All other pages are siblings in /pages/ so no path prefix needed.
-       ===================== -->
-  <nav class="site-nav" aria-label="Primary navigation">
-    <ul>
-      <li><a href="schedule.html" class="active">Schedule &amp; Results</a></li>
-      <li><a href="standings.html">Standings</a></li>
-      <li><a href="rules.html">Rules</a></li>
-      <li><a href="games.html">Games</a></li>
-    </ul>
-  </nav>
 
   <!-- =====================
        Main Content
@@ -80,6 +78,7 @@
   <!-- Script at end of body so the DOM is ready when it runs.
        Path is one level up because this page lives in /pages/. -->
   <script src="../js/schedule.js"></script>
+  <script src="../js/nav.js"></script>
 
 </body>
 </html>
