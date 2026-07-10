@@ -3,7 +3,7 @@
 ---
 
 ## 1. Match Format
-Teams consist of twelve men in the form of six two-man teams, including the club professional. Matches are played as fourballs with the nassau system:
+Teams consist of twelve men in the form of six two-man teams, including the club professional and 11 amateurs. Matches are played as fourballs with the nassau system:
 
 | Segment | Points |
 |---------|--------|
