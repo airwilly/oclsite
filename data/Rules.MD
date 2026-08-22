@@ -74,10 +74,9 @@ The **top 4 teams** by match points qualify for the playoffs:
 - Finals at the higher seed's home course
 
 **Tie-breaker order for seeding:**
-1. Match points
-2. Total game points
-3. Total game points from away matches
-4. Coin flip
+1. Total game points
+2. Total game points from away matches
+3. Coin flip
 
 **Deadlines:**
 - Round 1 must be completed by **end of September**
